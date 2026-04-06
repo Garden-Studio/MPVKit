@@ -1,6 +1,6 @@
-From 362b6eabb164c6fd9e2f9fb771754c615a39cbae Mon Sep 17 00:00:00 2001
+From 14fae40effbd8dc7d2670868dd75a4f31445417e Mon Sep 17 00:00:00 2001
 From: Alex Kim <alexkim@Alexs-MacBook-Pro.local>
-Date: Sat, 23 Aug 2025 20:11:28 +1000
+Date: Mon, 6 Apr 2026 20:14:09 +0200
 Subject: [PATCH] AVfoundation video output
 
 ---
@@ -12,10 +12,10 @@ Subject: [PATCH] AVfoundation video output
  create mode 100644 video/out/vo_avfoundation.m
 
 diff --git a/meson.build b/meson.build
-index 7572769e0e..d74fae0319 100644
+index fb10be5..c02552e 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -813,6 +813,14 @@ if features['avfoundation']
+@@ -823,6 +823,14 @@ if features['avfoundation']
      sources += files('audio/out/ao_avfoundation.m')
  endif
  
@@ -31,10 +31,10 @@ index 7572769e0e..d74fae0319 100644
                         'AudioUnit', 'AudioToolbox'], required: get_option('coreaudio'))
  features += {'coreaudio': coreaudio.found()}
 diff --git a/meson.options b/meson.options
-index dae0a333ef..b8d3ae30ba 100644
+index 52782f7..f08e396 100644
 --- a/meson.options
 +++ b/meson.options
-@@ -60,6 +60,7 @@ option('d3d11', type: 'feature', value: 'auto', description: 'Direct3D 11 video
+@@ -62,6 +62,7 @@ option('d3d11', type: 'feature', value: 'auto', description: 'Direct3D 11 video
  option('direct3d', type: 'feature', value: 'auto', description: 'Direct3D support')
  option('dmabuf-wayland', type: 'feature', value: 'auto', description: 'dmabuf-wayland video output')
  option('drm', type: 'feature', value: 'auto', description: 'Direct Rendering Manager (DRM)')
@@ -43,7 +43,7 @@ index dae0a333ef..b8d3ae30ba 100644
  option('egl-android', type: 'feature', value: 'auto', description: 'Android EGL support')
  option('egl-angle', type: 'feature', value: 'auto', description: 'OpenGL ANGLE headers')
 diff --git a/video/out/vo.c b/video/out/vo.c
-index 7b5df4b886..3b8bbd0b39 100644
+index c9cde30..f814fd5 100644
 --- a/video/out/vo.c
 +++ b/video/out/vo.c
 @@ -46,6 +46,7 @@
@@ -54,10 +54,10 @@ index 7b5df4b886..3b8bbd0b39 100644
  extern const struct vo_driver video_out_mediacodec_embed;
  extern const struct vo_driver video_out_x11;
  extern const struct vo_driver video_out_vdpau;
-@@ -69,6 +70,9 @@ extern const struct vo_driver video_out_kitty;
- 
- static const struct vo_driver *const video_out_drivers[] =
- {
+@@ -85,6 +86,9 @@ static const struct vo_driver *const video_out_drivers[] =
+ #if HAVE_XV
+     &video_out_xv,
+ #endif
 +#if HAVE_VO_AVFOUNDATION
 +    &video_out_avfoundation,
 +#endif
@@ -66,7 +66,7 @@ index 7b5df4b886..3b8bbd0b39 100644
  #endif
 diff --git a/video/out/vo_avfoundation.m b/video/out/vo_avfoundation.m
 new file mode 100644
-index 0000000000..1b3e13aece
+index 0000000..1b3e13a
 --- /dev/null
 +++ b/video/out/vo_avfoundation.m
 @@ -0,0 +1,1003 @@
@@ -1075,3 +1075,4 @@ index 0000000000..1b3e13aece
 +};
 -- 
 2.50.1 (Apple Git-155)
+
