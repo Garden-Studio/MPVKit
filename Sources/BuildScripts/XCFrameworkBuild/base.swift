@@ -1176,6 +1176,9 @@ enum PlatformType: String, CaseIterable {
         if self == .tvos || self == .tvsimulator {
             cflags.append("-DHAVE_FORK=0")
         }
+        if self == .maccatalyst {
+            cflags += ["-iframework", "\(isysroot)/System/iOSSupport/System/Library/Frameworks"]
+        }
         return cflags
     }
 
