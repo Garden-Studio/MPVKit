@@ -73,7 +73,7 @@ enum Library: String, CaseIterable {
     var version: String {
         switch self {
         case .libmpv:
-            return "v0.41.0"
+            return "dion"
         case .FFmpeg:
             return "n8.0.1"
         case .openssl:
@@ -122,7 +122,7 @@ enum Library: String, CaseIterable {
     var url: String {
         switch self {
         case .libmpv:
-            return "https://github.com/mpv-player/mpv"
+            return "https://github.com/Garden-Studio/mpv"
         case .FFmpeg:
             return "https://github.com/FFmpeg/FFmpeg"
         case .openssl:
