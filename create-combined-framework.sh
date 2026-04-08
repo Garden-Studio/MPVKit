@@ -291,7 +291,7 @@ MODULEMAP
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>MinimumOSVersion</key>
-    <string>12.0</string>
+    <string>26.0</string>
 </dict>
 </plist>
 PLIST
